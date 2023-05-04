@@ -11,7 +11,7 @@ const HeaderBox = ({ leftText, rightText }) => {
         total += +i.price;
       }
     }
-    setTotal(total);
+    setTotal(total.toFixed(2));
   }, [rightText]);
 
   return (

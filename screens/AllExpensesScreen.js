@@ -2,6 +2,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import HeaderBox from "../components/HeaderBox";
 import Card from "../components/Card";
+import { getFormattedDate } from "../util/data";
 
 const AllExpensesScreen = () => {
   const [data, setData] = useState([]);
@@ -11,21 +12,22 @@ const AllExpensesScreen = () => {
       setData([
         {
           name: "A Book",
-          date: "2023-4-15",
+          date: getFormattedDate(new Date("2023-4-15")),
           price: "43.99",
           key: "A book",
         },
         {
           name: "Some Bananas",
-          date: "2022-4-15",
+          date: getFormattedDate(new Date("2016-7-8")),
           price: "32.99",
           key: "Some Bananas",
         },
+
         {
-          name: "iPhone 14",
-          date: "2021-2-18",
-          price: "1200.99",
-          key: "iPhone",
+          name: "Pixel 4A",
+          date: getFormattedDate(new Date("2015-7-8")),
+          price: "400.99",
+          key: "Pixel",
         },
       ]);
     };
@@ -43,7 +45,7 @@ const AllExpensesScreen = () => {
           <View style={{ alignItems: "center", justifyContent: "center" }}>
             <Card
               name={item.name}
-              date={item.date}
+              date={item.date.toString()}
               price={item.price}
               id={item.key}
             />
@@ -59,7 +61,7 @@ export default AllExpensesScreen;
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
+    marginTop: 10,
     alignItems: "center",
     gap: 20,
   },

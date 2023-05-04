@@ -1,44 +1,33 @@
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
 const Card = ({ name, date, price, id }) => {
+  const navigation = useNavigation();
   const pressCardHandler = () => {
-    console.log(id);
+    navigation.navigate("ManageExpense", { id });
   };
 
   return (
-    <View style={style.box}>
-      <Pressable
-        style={({ pressed }) =>
-          pressed ? [style.btn, style.pressed] : style.btn
-        }
-        onPress={pressCardHandler}
-      >
-        <View>
-          <Text style={style.text}>{name}</Text>
-          <Text style={style.date}>{date}</Text>
-        </View>
-        <View style={style.price}>
-          <Text style={style.priceText}>{price}</Text>
-        </View>
-      </Pressable>
-    </View>
+    <Pressable
+      style={({ pressed }) =>
+        pressed ? [style.btn, style.pressed] : style.btn
+      }
+      onPress={pressCardHandler}
+    >
+      <View>
+        <Text style={style.text}>{name}</Text>
+        <Text style={style.date}>{date}</Text>
+      </View>
+      <View style={style.price}>
+        <Text style={style.priceText}>{price}</Text>
+      </View>
+    </Pressable>
   );
 };
 
 export default Card;
 
 const style = StyleSheet.create({
-  box: {
-    backgroundColor: "#2A2A2B",
-    width: "95%",
-    marginBottom: 14,
-    marginTop: 14,
-    borderRadius: 7,
-    padding: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
   text: {
     color: "white",
     marginBottom: 4,
@@ -51,7 +40,7 @@ const style = StyleSheet.create({
   },
   price: {
     backgroundColor: "white",
-    width: 70,
+    minWidth: 70,
     height: 50,
     textAlign: "center",
     justifyContent: "center",
@@ -65,14 +54,17 @@ const style = StyleSheet.create({
     opacity: 0.8,
   },
   btn: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
+    backgroundColor: "#2A2A2B",
+    width: "95%",
+    marginBottom: 14,
+    marginTop: 14,
+    borderRadius: 7,
+    padding: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
   pressed: {
-    opacity: 0.2,
+    opacity: 0.5,
   },
 });

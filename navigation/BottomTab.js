@@ -3,10 +3,15 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import RecentScreen from "../screens/RecentScreen";
 import AllExpensesScreen from "../screens/AllExpensesScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { IconButton } from "../components/UI/IconButton";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
 const MyTab = () => {
+  const navigation = useNavigation();
+  const ExpensesPressHandler = () => navigation.navigate("ManageExpense");
+
   return (
     <Tab.Navigator
       sceneContainerStyle={{ backgroundColor: "#010101" }}
@@ -17,15 +22,17 @@ const MyTab = () => {
         headerTintColor: "white",
         headerShadowVisible: false,
         tabBarStyle: {
-          backgroundColor: "#171717",
+          backgroundColor: "#202125",
           borderTopWidth: 0,
-          padding: 2,
+          padding: 5,
         },
-        tabBarActiveTintColor: "#34A0FF",
-        headerRight: () => (
-          <Ionicons
+        tabBarActiveTintColor: "#34B7F1",
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            color={"#34A0FF"}
+            fontSize={35}
             name="add"
-            style={{ marginHorizontal: 10, color: "white", fontSize: 30 }}
+            onPress={ExpensesPressHandler}
           />
         ),
       }}
