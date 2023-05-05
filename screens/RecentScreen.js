@@ -1,8 +1,8 @@
 import { View, StyleSheet, FlatList } from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { getFormattedDate } from "../util/data";
+import React, { useLayoutEffect, useState } from "react";
 import HeaderBox from "../components/HeaderBox";
 import Card from "../components/Card";
-import { getFormattedDate } from "../util/data";
 
 const RecentScreen = () => {
   const [data, setData] = useState([]);
