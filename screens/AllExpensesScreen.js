@@ -1,39 +1,20 @@
 import { View, StyleSheet, FlatList } from "react-native";
+import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import HeaderBox from "../components/HeaderBox";
 import Card from "../components/Card";
-import { getFormattedDate } from "../util/data";
 
 const AllExpensesScreen = () => {
   const [data, setData] = useState([]);
+  const expenses = useSelector((state) => state.expenseSlice.expenses);
 
   useEffect(() => {
     const getData = () => {
-      setData([
-        {
-          name: "A Book",
-          date: getFormattedDate(new Date("2023-4-15")),
-          price: "43.99",
-          key: "A book",
-        },
-        {
-          name: "Some Bananas",
-          date: getFormattedDate(new Date("2016-7-8")),
-          price: "32.99",
-          key: "Some Bananas",
-        },
-
-        {
-          name: "Pixel 4A",
-          date: getFormattedDate(new Date("2015-7-8")),
-          price: "400.99",
-          key: "Pixel",
-        },
-      ]);
+      setData(expenses);
     };
 
     getData();
-  }, []);
+  }, [expenses]);
 
   return (
     <View style={style.container}>
