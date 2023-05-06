@@ -6,7 +6,7 @@ const HeaderBox = ({ leftText, rightText }) => {
 
   useEffect(() => {
     let total = 0;
-    if (rightText[0]?.price) {
+    if (rightText && rightText[0]?.price) {
       for (let i of rightText) {
         total += +i.price;
       }

@@ -2,14 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getFormattedDate } from "../util/data";
 
 const initialState = {
-  expenses: [
-    {
-      name: "A Book",
-      date: getFormattedDate(new Date()),
-      price: "43.99",
-      key: Date.now() + Math.random(),
-    },
-  ],
+  expenses: [],
 };
 
 const expensesSlice = createSlice({
@@ -17,21 +10,20 @@ const expensesSlice = createSlice({
   initialState,
   reducers: {
     addExpense: (state, action) => {
-      state.expenses.push(action.payload);
+      state.expenses = [action.payload, ...state.expenses];
     },
     updateExpense: (state, action) => {
       state.expenses.forEach((e) => {
-        if (e.key == action.payload?.expenseInfo?.key) {
-          e = action.payload.expenseInfo;
+        if (e.key == action.payload.key) {
+          e.name = action.payload.updatedExpense.name;
+          e.price = action.payload.updatedExpense.price;
           return;
         }
       });
     },
     deleteExpense: (state, action) => {
-      const newState = state.expenses.filter(
-        (e) => e.key !== action.payload.expenseInfo.key
-      );
-      return newState;
+      const newState = state.expenses.filter((e) => e.key !== action.payload);
+      state.expenses = newState;
     },
   },
 });

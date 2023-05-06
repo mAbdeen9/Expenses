@@ -12,18 +12,23 @@ const ManageExpense = ({ route, navigation }) => {
   const expensesId = route.params?.id;
   const isEditing = !!expensesId;
 
+  const expense = {
+    name: inputValue,
+    date: getFormattedDate(new Date()),
+    price: "22",
+    key: Date.now() + Math.random(),
+  };
+
   const confirmHandler = () => {
     if (isEditing) {
+      const data = {
+        updatedExpense: expense,
+        key: expensesId,
+      };
+      dispatch(expensesActions.updateExpense(data));
     }
     if (!isEditing) {
-      dispatch(
-        expensesActions.addExpense({
-          name: inputValue,
-          date: getFormattedDate(new Date()),
-          price: "22",
-          key: Date.now() + Math.random(),
-        })
-      );
+      dispatch(expensesActions.addExpense(expense));
     }
 
     navigation.goBack();
@@ -32,6 +37,7 @@ const ManageExpense = ({ route, navigation }) => {
     navigation.goBack();
   };
   const deleteHandler = () => {
+    dispatch(expensesActions.deleteExpense(expensesId));
     navigation.goBack();
   };
 
