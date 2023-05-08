@@ -17,7 +17,7 @@ const HeaderBox = ({ leftText, rightText }) => {
   return (
     <View style={style.headerBox}>
       <Text style={style.text}>{leftText}</Text>
-      <Text style={style.text}>{total}</Text>
+      <Text style={style.text}>${total}</Text>
     </View>
   );
 };

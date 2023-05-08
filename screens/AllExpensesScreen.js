@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, Text } from "react-native";
 import { useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import HeaderBox from "../components/HeaderBox";
@@ -7,7 +7,7 @@ import Card from "../components/Card";
 const AllExpensesScreen = () => {
   const [data, setData] = useState([]);
   const expenses = useSelector((state) => state.expenseSlice.expenses);
-
+  let noExpenses = <Text style={style.msg}>No Expense yet 💥 </Text>;
   useEffect(() => {
     const getData = () => {
       setData(expenses);
@@ -19,20 +19,24 @@ const AllExpensesScreen = () => {
   return (
     <View style={style.container}>
       <HeaderBox leftText={"Total"} rightText={data} />
-      <FlatList
-        style={style.flatList}
-        data={data}
-        renderItem={({ item }) => (
-          <View style={{ alignItems: "center", justifyContent: "center" }}>
-            <Card
-              name={item.name}
-              date={item.date.toString()}
-              price={item.price}
-              id={item.key}
-            />
-          </View>
-        )}
-      />
+      {expenses.length > 0 ? (
+        <FlatList
+          style={style.flatList}
+          data={data}
+          renderItem={({ item }) => (
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
+              <Card
+                name={item.name}
+                date={item.date.toString()}
+                price={item.price}
+                id={item.key}
+              />
+            </View>
+          )}
+        />
+      ) : (
+        noExpenses
+      )}
     </View>
   );
 };
@@ -48,5 +52,12 @@ const style = StyleSheet.create({
   },
   flatList: {
     width: "100%",
+  },
+  msg: {
+    color: "white",
+    fontSize: 18,
+    padding: 7,
+    margin: 5,
+    fontWeight: "600",
   },
 });
