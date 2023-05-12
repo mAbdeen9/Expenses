@@ -25,7 +25,7 @@ export default function App() {
               component={ManageExpense}
               options={{
                 title: "Manage",
-                headerTintColor: "white",
+                headerTintColor: "white",                     
                 presentation: "modal",
                 headerStyle: {
                   backgroundColor: "black",

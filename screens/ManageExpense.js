@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { expensesActions } from "../store/expenseSlice";
 import { getFormattedDate } from "../util/data";
 import CustomBtn from "../components/UI/CustomBtn";
+import ExpenseForm from "../components/ExpenseForm";
 
 const ManageExpense = ({ route, navigation }) => {
   const [inputValue, setInputValue] = useState();
@@ -49,6 +50,7 @@ const ManageExpense = ({ route, navigation }) => {
 
   return (
     <View style={style.container}>
+      <ExpenseForm data={(data) => console.log(data)} />
       <TextInput
         value={inputValue}
         onChangeText={(text) => setInputValue(text)}
