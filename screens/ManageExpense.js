@@ -27,9 +27,8 @@ const ManageExpense = ({ route, navigation }) => {
   };
 
   const confirmHandler = () => {
-    console.log(expense.date);
     const amountIsValid = !isNaN(expense.price) && expense.price > 0;
-    const dateIsValid = expense.date.toString() !== "Invalid Date";
+    const dateIsValid = expense.date !== "NaN-NaN-NaN";
     const descriptionIsValid = expense.name.trim().length > 0;
 
     if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
