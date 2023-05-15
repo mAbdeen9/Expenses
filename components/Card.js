@@ -15,7 +15,9 @@ const Card = ({ name, date, price, id }) => {
       onPress={pressCardHandler}
     >
       <View>
-        <Text style={style.text}>{name}</Text>
+        <View style={{ maxWidth: 200, maxHeight: 40, overflow: "hidden" }}>
+          <Text style={style.text}>{name}</Text>
+        </View>
         <Text style={style.date}>{date}</Text>
       </View>
       <View style={style.price}>
@@ -30,8 +32,8 @@ export default Card;
 const style = StyleSheet.create({
   text: {
     color: "white",
-    marginBottom: 4,
-    fontSize: 17,
+    marginBottom: 5,
+    fontSize: 15,
     fontWeight: "bold",
   },
   date: {
@@ -63,6 +65,7 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    overflow: "hidden",
   },
   pressed: {
     opacity: 0.5,

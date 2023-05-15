@@ -5,7 +5,8 @@ import AllExpensesScreen from "../screens/AllExpensesScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { IconButton } from "../components/UI/IconButton";
 import { useNavigation } from "@react-navigation/native";
-
+import { Dimensions, Platform } from "react-native";
+const windowHeight = Dimensions.get("window").height;
 const Tab = createBottomTabNavigator();
 
 const MyTab = () => {
@@ -25,6 +26,11 @@ const MyTab = () => {
           backgroundColor: "#202125",
           borderTopWidth: 0,
           padding: 5,
+          paddingBottom: windowHeight > 800 ? 30 : 5,
+          height: windowHeight > 800 ? 80 : 52,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         },
         tabBarActiveTintColor: "#34B7F1",
         headerRight: ({ tintColor }) => (

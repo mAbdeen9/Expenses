@@ -17,6 +17,7 @@ const expensesSlice = createSlice({
         if (e.key == action.payload.key) {
           e.name = action.payload.updatedExpense.name;
           e.price = action.payload.updatedExpense.price;
+          e.date = action.payload.updatedExpense.date;
           return;
         }
       });

@@ -21,6 +21,7 @@ const style = StyleSheet.create({
   inputContainer: {
     marginHorizontal: 4,
     marginVertical: 6,
+    minWidth: 150,
   },
   label: {
     fontSize: 12,
