@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { View, StyleSheet, TextInput, Alert } from "react-native";
 import { IconButton } from "../components/UI/IconButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { expensesActions } from "../store/expenseSlice";
 import { getFormattedDate } from "../util/data";
 import CustomBtn from "../components/UI/CustomBtn";
 import ExpenseForm from "../components/ExpenseForm";
+import httpRequest, { updateExpense } from "../util/http";
 
 const ManageExpense = ({ route, navigation }) => {
   const [inputValues, setInputValues] = useState({
@@ -26,7 +27,7 @@ const ManageExpense = ({ route, navigation }) => {
     key: Date.now() + Math.random(),
   };
 
-  const confirmHandler = () => {
+  const confirmHandler = async () => {
     const amountIsValid = !isNaN(expense.price) && expense.price > 0;
     const dateIsValid = expense.date !== "NaN-NaN-NaN";
     const descriptionIsValid = expense.name.trim().length > 0;
@@ -41,9 +42,13 @@ const ManageExpense = ({ route, navigation }) => {
         updatedExpense: expense,
         key: expensesId,
       };
+
       dispatch(expensesActions.updateExpense(data));
+      console.log(expense);
+      // await updateExpense(data.id, data.updatedExpense);
     }
     if (!isEditing) {
+      httpRequest("POST", JSON.stringify(expense));
       dispatch(expensesActions.addExpense(expense));
     }
 
@@ -54,6 +59,7 @@ const ManageExpense = ({ route, navigation }) => {
   };
   const deleteHandler = () => {
     dispatch(expensesActions.deleteExpense(expensesId));
+
     navigation.goBack();
   };
 

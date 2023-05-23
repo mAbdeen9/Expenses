@@ -1,15 +1,30 @@
 import { View, StyleSheet, FlatList, Text } from "react-native";
-import { useSelector } from "react-redux";
-import React, { useLayoutEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import HeaderBox from "../components/HeaderBox";
 import Card from "../components/Card";
 import { getDateMinusDays } from "../util/data";
+import httpRequest from "../util/http";
+import { expensesActions } from "../store/expenseSlice";
 
 const RecentScreen = () => {
   const [data, setData] = useState([]);
   const expenses = useSelector((state) => state.expenseSlice.expenses);
+  const dispatch = useDispatch();
 
   let noExpenses = <Text style={style.msg}>No Expense in last 7 days 🧐</Text>;
+
+  useEffect(() => {
+    const apiData = async () => {
+      const expenses = await httpRequest("get");
+      let expenseArray = [];
+      for (let e in expenses.data) {
+        expenseArray.push({ ...expenses.data[e], id: e });
+      }
+      dispatch(expensesActions.dataFromDatabase(expenseArray));
+    };
+    apiData();
+  }, []);
 
   useLayoutEffect(() => {
     const getData = () => {

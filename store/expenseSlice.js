@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getFormattedDate } from "../util/data";
 
 const initialState = {
   expenses: [],
@@ -25,6 +24,9 @@ const expensesSlice = createSlice({
     deleteExpense: (state, action) => {
       const newState = state.expenses.filter((e) => e.key !== action.payload);
       state.expenses = newState;
+    },
+    dataFromDatabase: (state, action) => {
+      state.expenses = [...action.payload.reverse()];
     },
   },
 });
